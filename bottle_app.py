@@ -4,10 +4,10 @@ import sqlite3 as db
 import os
 
 
-ON_PYHTONANWHERE = "PYHTONANYWHERE_DOMAIN" in os.environ.keys()
+ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
 
 
-if ON_PYHTONANWHERE:
+if ON_PYTHONANYWHERE:
     from bottle import default_app
 else:
     from bottle import run, debug
@@ -41,7 +41,7 @@ def post_new_item():
     redirect('/')
 
 
-if ON_PYHTONANWHERE:
+if ON_PYTHONANYWHERE:
     application = default_app()
 else:
     debug(True)
