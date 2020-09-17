@@ -1,5 +1,17 @@
-from bottle import get, post, run, template, debug, request, redirect
+from bottle import get, post, template, request, redirect
+
 import sqlite3 as db
+import os
+
+
+ON_PYHTONANWHERE = "PYHTONANYWHERE_DOMAIN" in os.environ.keys()
+
+
+if ON_PYHTONANWHERE:
+    from bottle import default_app
+else:
+    from bottle import run, debug
+
 
 @get('/') # Get handlers are a kind of route handlers
 def get_show_list():
@@ -11,9 +23,11 @@ def get_show_list():
     conn.close() # We should be using one singleton connection but because we aren't, close our connections
     return template("show_list", rows=result)
 
+
 @get('/new_item')
 def get_new_item():
     return template("new_item")
+
 
 @post('/new_item') # Handles when a new item is saved
 def post_new_item():
@@ -26,6 +40,9 @@ def post_new_item():
     conn.close()
     redirect('/')
 
-    
-debug(True)
-run(host="localhost",port=8080, reloader=True)
+
+if ON_PYHTONANWHERE:
+    application = default_app()
+else:
+    debug(True)
+    run(host="localhost",port=8080, reloader=True)
