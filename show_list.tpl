@@ -1,4 +1,4 @@
-<p>Todo List</p>
+<p>Basic Todo List, version 1</p>
 <table border="1">
 %for row in rows:
     <tr>
