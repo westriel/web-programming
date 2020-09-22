@@ -40,9 +40,19 @@ def post_new_item():
     conn.close()
     redirect('/')
 
+@get('/delete_item/<id:int>')
+def get_delete_item(id):
+    conn = db.connect("todo.db")
+    cursor = conn.cursor()
+    cursor.execute("delete from todo where id=?", (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    redirect('/')
+
 
 if ON_PYTHONANYWHERE:
     application = default_app()
 else:
     debug(True)
-    run(host="localhost",port=8080, reloader=True)
+    run(host="localhost",port=8080)
