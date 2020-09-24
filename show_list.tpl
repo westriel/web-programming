@@ -1,4 +1,4 @@
-<h3>Basic Todo List, version 1</h3>
+<h3>Basic Todo List, version 1.1</h3>
 <hr/>
 <table border="1">
 %for row in rows:
@@ -15,4 +15,4 @@
 %end
 </table>
 <hr/>
-<a href="/new_item">New Item…</a>
+<a href="/new_item">New Item... :-)</a>
