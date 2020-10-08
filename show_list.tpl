@@ -3,10 +3,25 @@
     <title>Todo List 0.001</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+
+    <style>
+        a:link, a:visited {
+            color: teal !important;
+            text-decoration: none;
+        }
+
+        a:hover, a:active {
+            color: purple !important;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-    <h3 class="w3-center w3-block w3-teal">Basic Todo List, version 1.2</h3>
+    <div class="w3-container w3-teal">
+        <h3 class="w3-center">Basic Todo List, version 1.2</h3>
+    </div>
+
     <table class="w3-table w3-striped">
     %for row in rows:
         <tr>
