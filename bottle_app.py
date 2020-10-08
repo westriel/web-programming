@@ -1,8 +1,9 @@
-from bottle import get, post, template, request, redirect
-
+import datetime as date
 import sqlite3 as db
+import random as r
 import os
 
+from bottle import get, post, template, request, response, redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
 
@@ -11,6 +12,9 @@ if ON_PYTHONANYWHERE:
     from bottle import default_app
 else:
     from bottle import run, debug
+
+
+r.seed()
 
 
 @get('/') # Get handlers are a kind of route handlers
@@ -85,6 +89,30 @@ def post_update_item():
     cursor.close()
     conn.close()
     redirect('/')
+
+
+visit_times = {}
+first_visit = {}
+
+
+@get('/visit')
+def get_visit():
+    visitCounter = int(request.cookies.get("visitCounter",'0'))
+    userID = request.cookies.get("userID",str(r.randint(1000000000,2000000000)))
+    visitCounter = visitCounter + 1
+    response.set_cookie("visitCounter",str(visitCounter))
+    response.set_cookie("userID",str(userID))
+    # set_cookie options:
+    #    max_age = #, in seconds
+    #    httponly = T/F, disallows javascript from messing with the cookie
+    #    secure = T/F
+    #    secret = "", allows you to cryptographically encrypt the cookie, use request.get_cookie("cookie_name", 'default val', secret="")
+    lastVisit = visit_times.get(userID,"never")
+    visit_times[userID] = str(date.datetime.now())
+    if lastVisit == "never":
+        first_visit[userID] = visit_times[userID]
+    #cookie = request.cookies["visitCounter"] Can be treated as a dictionary but errors if the cookie doesn't exist
+    return("User #" + str(userID) + ", you have visited " + str(visitCounter) + " times, and your last visit was at: " + lastVisit + ", and your first visit was on " + first_visit[userID] + ".")
 
 
 if ON_PYTHONANYWHERE:
