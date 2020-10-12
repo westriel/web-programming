@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Todo List 0.002</title>
+    <title>Todo List 0.003</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
