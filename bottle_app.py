@@ -28,6 +28,11 @@ def get_show_list():
     return template("show_list", rows=result)
 
 
+@get('/sandbox')
+def get_sandbox():
+    return template("sandbox")
+
+
 @get('/new_item')
 def get_new_item():
     return template("new_item")
