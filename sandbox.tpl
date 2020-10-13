@@ -2,7 +2,7 @@
 <head>
     <title>Its a Sandbox!</title>
     <script>
-        x = 0;
+        x = 1;
         function onMyTextClick() {
             document.getElementById("my_text").innerHTML="I have been clicked " + x++ + " times";
         };
@@ -10,9 +10,13 @@
             document.getElementById("super_special_section").hidden=false;
         };
         function onSpecialSectionClick() {
-            val =  document.getElementById("special_section").getAttribute("hidden");
+            val =  document.getElementById("special_section").style.display
             console.log(val);
-            document.getElementById("special_section").hidden = !val;
+            if(val === "none") {
+                document.getElementById("special_section").style.display = "block";
+            } else {
+                document.getElementById("special_section").style.display = "none";
+            }
         };
     </script
 </head>
