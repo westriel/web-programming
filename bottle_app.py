@@ -2,7 +2,11 @@ import datetime as date
 import sqlite3 as db
 import random as r
 import os
+import uuid
 
+from tinydb import TinyDB, Query
+db = TinyDB("sessions.json")
+query = Query()
 from bottle import get, post, template, request, response, redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
@@ -96,28 +100,19 @@ def post_update_item():
     redirect('/')
 
 
-visit_times = {}
-first_visit = {}
-
-
 @get('/visit')
 def get_visit():
-    visitCounter = int(request.cookies.get("visitCounter",'0'))
-    userID = request.cookies.get("userID",str(r.randint(1000000000,2000000000)))
-    visitCounter = visitCounter + 1
-    response.set_cookie("visitCounter",str(visitCounter))
-    response.set_cookie("userID",str(userID))
-    # set_cookie options:
-    #    max_age = #, in seconds
-    #    httponly = T/F, disallows javascript from messing with the cookie
-    #    secure = T/F
-    #    secret = "", allows you to cryptographically encrypt the cookie, use request.get_cookie("cookie_name", 'default val', secret="")
-    lastVisit = visit_times.get(userID,"never")
-    visit_times[userID] = str(date.datetime.now())
-    if lastVisit == "never":
-        first_visit[userID] = visit_times[userID]
-    #cookie = request.cookies["visitCounter"] Can be treated as a dictionary but errors if the cookie doesn't exist
-    return("User #" + str(userID) + ", you have visited " + str(visitCounter) + " times, and your last visit was at: " + lastVisit + ", and your first visit was on " + first_visit[userID] + ".")
+    sesID = request.cookies.get("sesID",str(uuid.uuid4()))
+    result = db.search(query.session_id == sesID)
+    if len(result) == 0:
+        db.insert({"session_id":sesID, "visit_count":1})
+        visit_count = 1
+    else:
+        session = result[0]
+        visit_count = session["visit_count"] + 1
+        db.update({"visit_count":visit_count},query.session_id == sesID)
+    response.set_cookie("sesID",str(sesID))
+    return(f"Welcome, user #{sesID}. This is visit #{visit_count}")
 
 
 if ON_PYTHONANYWHERE:
