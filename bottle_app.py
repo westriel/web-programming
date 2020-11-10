@@ -32,6 +32,11 @@ def get_show_list():
     return template("show_list", rows=result)
 
 
+@get('/picture')
+def get_picture():
+    return template("picture")
+
+
 @get('/sandbox')
 def get_sandbox():
     return template("sandbox")
