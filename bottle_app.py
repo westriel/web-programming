@@ -5,7 +5,7 @@ import os
 import uuid
 
 from tinydb import TinyDB, Query
-db = TinyDB("sessions.json")
+tdb = TinyDB("sessions.json")
 query = Query()
 from bottle import get, post, template, request, response, redirect
 
@@ -108,14 +108,14 @@ def post_update_item():
 @get('/visit')
 def get_visit():
     sesID = request.cookies.get("sesID",str(uuid.uuid4()))
-    result = db.search(query.session_id == sesID)
+    result = tdb.search(query.session_id == sesID)
     if len(result) == 0:
-        db.insert({"session_id":sesID, "visit_count":1})
+        tdb.insert({"session_id":sesID, "visit_count":1})
         visit_count = 1
     else:
         session = result[0]
         visit_count = session["visit_count"] + 1
-        db.update({"visit_count":visit_count},query.session_id == sesID)
+        tdb.update({"visit_count":visit_count},query.session_id == sesID)
     response.set_cookie("sesID",str(sesID))
     return(f"Welcome, user #{sesID}. This is visit #{visit_count}")
 
