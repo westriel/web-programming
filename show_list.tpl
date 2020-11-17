@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Todo List 0.003</title>
+    <title>Todo List 0.004</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 
@@ -19,13 +19,14 @@
 
 <body>
     <div class="w3-container w3-teal">
-        <h3 class="w3-center">Basic Todo List, version 1.2</h3>
+        <h3 class="w3-center">Basic Todo List, version 1.3</h3>
+        <h4 class="w3-center">Welcome, {{username}}</h4>
     </div>
 
     <table class="w3-table w3-striped">
     %for row in rows:
         <tr>
-            <!--<td>{{str(row[0])}}</td>-->
+
             <td>
                 <a href="/update_item/{{row[0]}}">
                     <i class="material-icons">edit</i>
@@ -48,5 +49,7 @@
     %end
     </table>
     <a href="/new_item"><button class="w3-button w3-block w3-teal w3-hover-purple">New Item...</button></a>
+    <a href="/login"><button class="w3-button w3-block w3-teal w3-hover-purple">Login...</button></a>
+    <a href="/logout"><button class="w3-button w3-block w3-teal w3-hover-purple">Logout...</button></a>
 </body>
 </html>

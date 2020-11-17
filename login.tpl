@@ -11,9 +11,10 @@
 
     <form class="w3-container" action="/login" method="POST">
         <p>
-            Username: <input class="w3-input" type="text" size="100" maxlength="100" name="username"/>
-            Password: <input class="w3-input" type="text" size="100" maxlength="100" name="password"/>
+            Username: <input class="w3-input" type="text"     size="100" maxlength="100" name="username"/>
+            Password: <input class="w3-input" type="password" size="100" maxlength="100" name="password"/>
         </p>
+        <input type="text" size="100" maxlength="100" name="csrf_token" value={{csrf_token}} hidden/>
         <p>
             <button class="w3-button w3-block w3-teal w3-hover-purple">Save</button>
             <!--<input type="submit" name="save" value="Save"/>-->
