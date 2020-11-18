@@ -92,10 +92,14 @@ function draw() {
     if(bounds[0] <= 0 || bounds[2] >= width){
         vel[0] *= -1;
         scaleDown = true;
+        if(myRect.width > myRect.height)
+            [myRect.width, myRect.height] = [myRect.height, myRect.width]
     }
     if(bounds[1] <= 0 || bounds[3] >= height){
         vel[1] *= -1;
         scaleDown = true;
+        if(myRect.height > myRect.width)
+            [myRect.width, myRect.height] = [myRect.height, myRect.width]
     }
 
     if(r > 0 && g < 255 && b == 0) {--r; ++g}
