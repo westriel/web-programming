@@ -3,6 +3,7 @@ import sqlite3 as db
 import random as r
 import os
 import uuid
+import time
 
 from tinydb import TinyDB, Query
 tdb = TinyDB("sessions.json")
@@ -23,18 +24,22 @@ r.seed()
 
 @get('/') # Get handlers are a kind of route handlers
 def get_show_list():
-
-    sesID = request.cookies.get("sesID",str(uuid.uuid4()))
-    result = tdb.search(query.session_id == sesID)
-    if len(result) == 0:
-        username="New User"
-    else:
-        session = result[0]
-        if "username" in session:
-            username = session['username']
-        else:
-            username = "Unknown User"
-    response.set_cookie("sesID",str(sesID))
+    # Ask for cookie, if not found, start guest session
+    sesID = request.cookies.get("sesID")
+    if sesID == None: # If session not found
+        sesID = str(uuid.uuid4())
+        session = {"session_id":sesID, "username":"Guest", "time":int(time.time())}
+        tdb.insert(session)
+        response.set_cookie("sesID",str(sesID))
+    else: # Had a cookie w/ ID, look up the ID
+        result = tdb.search(query.session_id == sesID)
+        if len(result) == 0: # Didn't find a session in db, start new
+            sesID = str(uuid.uuid4())
+            session = {"session_id":sesID, "username":"Guest", "time":int(time.time())}
+            tdb.insert(session)
+            response.set_cookie("sesID",str(sesID))
+        else: # Session found
+            session = result[0]
 
     conn = db.connect("todo.db")
     cursor = conn.cursor()
@@ -42,7 +47,7 @@ def get_show_list():
     result = cursor.fetchall()
     cursor.close()
     conn.close() # We should be using one singleton connection but because we aren't, close our connections
-    return template("show_list", rows=result, username=username)
+    return template("show_list", rows=result, username=session["username"], session={})
 
 
 @get('/picture')

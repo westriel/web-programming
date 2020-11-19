@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    % include("header.tpl", session=session)
     <div class="w3-container w3-teal">
         <h3 class="w3-center">Basic Todo List, version 1.3</h3>
         <h4 class="w3-center">Welcome, {{username}}</h4>
@@ -48,8 +49,9 @@
         </tr>
     %end
     </table>
-    <a href="/new_item"><button class="w3-button w3-block w3-teal w3-hover-purple">New Item...</button></a>
+    <!-- <a href="/new_item"><button class="w3-button w3-block w3-teal w3-hover-purple">New Item...</button></a>
     <a href="/login"><button class="w3-button w3-block w3-teal w3-hover-purple">Login...</button></a>
-    <a href="/logout"><button class="w3-button w3-block w3-teal w3-hover-purple">Logout...</button></a>
+    <a href="/logout"><button class="w3-button w3-block w3-teal w3-hover-purple">Logout...</button></a> -->
+    <!-- % include("footer.tpl", session=session) -->
 </body>
 </html>
