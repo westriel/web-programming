@@ -184,6 +184,16 @@ def get_logout():
     return
 
 
+@get('/ajaxdemo')
+def get_ajaxdemo():
+    return template("ajaxdemo")
+
+
+@get('/jquerydemo')
+def get_jquerydemo():
+    return template("jquerydemo")
+
+
 if ON_PYTHONANYWHERE:
     application = default_app()
 else:
