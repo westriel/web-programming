@@ -6,7 +6,7 @@
 
 <body>
     <div class="w3-container w3-teal">
-        <h2 class="w3-center">Login</h2>
+        <h2 class="w3-center">Error</h2>
     </div>
 
     <form class="w3-container" action="/login" method="GET">

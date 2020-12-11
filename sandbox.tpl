@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Its a Sandbox!</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
     <script>
         x = 1;
         function onMyTextClick() {
@@ -22,11 +23,17 @@
 </head>
 
 <body>
-    Hello from the sandbox
+    <div class="w3-container w3-teal">
+        <h3 class="w3-center">Sandbox</h3>
+    </div>
+    %include("header.tpl", session=session, current="sandbox")
+    <div class="w3-container">
+        Hello from the sandbox
+    </div>
     <hr/>
-    <div id="special_section">This is a special section<hr/></div>
-    <div id="super_special_section" hidden>This is a super special section<hr/></div>
-    <div id="my_text">MY DIV</div>
+    <div id="special_section" class="w3-container">This is a special section<hr/></div>
+    <div id="super_special_section" class="w3-container" hidden>This is a super special section<hr/></div>
+    <div id="my_text" class="w3-container">MY DIV</div>
     <hr/>
     <button type="button" onclick='onMyTextClick();'>Click Me!</button>
     <button type="button" onclick='onSpecialSectionClick();'>Toggle Special Section</button>

@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>jQuery Demo Page</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
 
@@ -9,12 +10,14 @@
                 // $("#my_text").html("<b>Hello from jQuery</b>") // Selects the item with id my_text, allows html
                 // $("#my_text").load("http://dev-westriel.pythonanywhere.com/static/data.txt") // Ajax call
                 $.getJSON("https://dev-westriel.pythonanywhere.com/static/data.json", function(result) {
-                    $("#content").html("<ul>");
+                    var list = "<ul>"
                     $.each(result, function(i, field) {
                         console.log(i, field["fruit"]);
-                        $("#content").append("<li>" + field["fruit"] + "</li>");
+                        list = list + "<li>" + field["fruit"] + "</li>";
                     })
-                    $("#content").append("</ul>");
+                    list = list + "</ul>"
+                    console.log(list);
+                    $("#content").html(list);
                     console.log(result);
                 }) // Ajax JSON call
             })
@@ -22,7 +25,10 @@
     </head>
 
     <body>
-        Hello from the sandbox
+    <div class="w3-container w3-teal">
+        <h3 class="w3-center">Hello from the sandbox</h3>
+    </div>
+    %include("header.tpl", session=session, current="jquery")
         <hr/>
         <div id="content">MY DIV</div>
         <hr/>
