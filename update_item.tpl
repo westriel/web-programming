@@ -9,10 +9,7 @@
         <h2 class="w3-center">Update Item</h2>
     </div>
     %include("header.tpl", session=session, current="")
-    <div class="w3-bar w3-teal">
-        <a href="/new_item" class="w3-button w3-bar-item w3-teal w3-hover-purple">New Item</a>
-        <span class="w3-button w3-bar-item w3-purple w3-hover-purple selected">Update Item</span>
-    </div>
+    %include("show_list_options.tpl", loc="update", old=old)
 
     %if not old:
     <form class="w3-container" action="/update_item" method="POST">

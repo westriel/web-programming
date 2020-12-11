@@ -14,9 +14,7 @@
         <h2 class="w3-center">New Item</h2>
     </div>
     %include("header.tpl", session=session, current="")
-    <div class="w3-bar w3-teal">
-        <a href="/new_item" class="w3-button w3-bar-item w3-purple w3-hover-purple selected">New Item</a>
-    </div>
+    %include("show_list_options.tpl", loc="update", old=old)
 
     %if not old:
     <form class="w3-container" action="/new_item" method="POST">
