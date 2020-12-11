@@ -11,7 +11,7 @@
     %include("header.tpl", session=session, current="")
     <div class="w3-bar w3-teal">
         <a href="/new_item" class="w3-button w3-bar-item w3-teal w3-hover-purple">New Item</a>
-        <a href="/new_item" class="w3-button w3-bar-item w3-purple w3-hover-purple selected">Update Item</a>
+        <span class="w3-button w3-bar-item w3-purple w3-hover-purple selected">Update Item</span>
     </div>
 
     %if not old:

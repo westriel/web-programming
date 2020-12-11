@@ -67,12 +67,10 @@
 
 <body>
     <div class="w3-container w3-teal">
-        <h3 class="w3-center">Basic (ajax) Todo List, version 1.4</h3>
+        <h2 class="w3-center">Basic (ajax) Todo List, version 1.4</h2>
     </div>
     %include("header.tpl", session=session, current="list")
-    <div class="w3-bar w3-teal">
-        <a href="/new_item" class="w3-button w3-bar-item w3-teal w3-hover-purple">New Item</a>
-    </div>
+    %include("show_list_options.tpl", loc="", old=False)
 
     <div id=content>Loading...</div>
 </body>
