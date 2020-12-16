@@ -14,7 +14,7 @@
         <h2 class="w3-center">New Item</h2>
     </div>
     %include("header.tpl", session=session, current="")
-    %include("show_list_options.tpl", loc="update", old=old)
+    %include("show_list_options.tpl", loc="new", old=old)
 
     %if not old:
     <form class="w3-container" action="/new_item" method="POST">

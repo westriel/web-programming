@@ -26,7 +26,7 @@
 
     <body>
     <div class="w3-container w3-teal">
-        <h3 class="w3-center">Hello from the sandbox</h3>
+        <h2 class="w3-center">Hello from the sandbox</h2>
     </div>
     %include("header.tpl", session=session, current="jquery")
         <hr/>

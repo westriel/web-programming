@@ -22,7 +22,7 @@
         <h2 class="w3-center">Basic Todo List, version 1.4</h2>
     </div>
     %include("header.tpl", session=session, current="list")
-    %include("show_list_options.tpl", loc="update", old=old)
+    %include("show_list_options.tpl", loc="", old=True)
 
     <table class="w3-table w3-striped">
     %for row in rows:

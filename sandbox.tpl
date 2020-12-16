@@ -3,9 +3,20 @@
     <title>Its a Sandbox!</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
     <script>
-        x = 1;
+        x = 0;
         function onMyTextClick() {
-            document.getElementById("my_text").innerHTML="I have been clicked " + x++ + " times";
+            ++x;
+            myStr = "";
+            if(x % 100 == 69) {
+                myStr = `I have been clicked ${x} time${x == 1 ? "":"s"} ;)`;
+            } else if (x == 404) {
+                myStr = `404, count not found`;
+            } else if (x == 413) {
+                myStr = `| h4v3 b33n c1ick3d ${x} t|m35.`;
+            } else {
+                myStr = `I have been clicked ${x} times.`
+            }
+            document.getElementById("my_text").innerHTML = myStr;
         };
         function onSuperSpecialSectionClick() {
             document.getElementById("super_special_section").hidden=false;
@@ -24,7 +35,7 @@
 
 <body>
     <div class="w3-container w3-teal">
-        <h3 class="w3-center">Sandbox</h3>
+        <h2 class="w3-center">Sandbox</h2>
     </div>
     %include("header.tpl", session=session, current="sandbox")
     <div class="w3-container">

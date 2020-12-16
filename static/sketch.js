@@ -2,6 +2,49 @@ let margin = 50;
 let scaleDown = true;
 let r = 255, g = 0, b = 0;
 let vel;
+let back_button;
+
+class MyButton {
+
+    constructor(x, y, w, h, word, pad) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h
+        this.word = word;
+        this.pad = pad;
+    }
+
+    checkX() {
+        return mouseX > (this.x-this.pad) && mouseX < (this.x+this.w+this.pad);
+    }
+
+    checkY() {
+        return mouseY > (this.y-this.pad) && mouseY < (this.y+this.w+this.pad);
+    }
+
+    clicked() {
+        if(mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+            window.location = "/";
+        }
+    }
+
+    draw() {
+        if(this.checkX() && this.checkY()) {
+            fill('rgba(255,255,255,1)');
+            rect(this.x, this.y, this.w, this.h, 20, 20, 20, 20);
+            fill(0);
+            textSize(this.h-10);
+            text(this.word, this.x+5, this.y+this.h-10);
+        } else {
+            fill('rgba(255,255,255,0.25)');
+            rect(this.x, this.y, this.w, this.h, 20, 20, 20, 20);
+            fill('rgba(0,0,0,0.25)');
+            textSize(this.h-10);
+            text(this.word, this.x+5, this.y+this.h-10);
+        }
+    }
+};
 
 class Rectangle {
 
@@ -37,7 +80,7 @@ class Rectangle {
     }
 
     boundary() { // Returns left, top, right, bottom boundary in that order
-        return [this.centerX-this.width/2, 
+        return [this.centerX-this.width/2,
                 this.centerY-this.height/2,
                 this.centerX+this.width/2,
                 this.centerY+this.height/2]
@@ -66,16 +109,27 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     myRect = new Rectangle(width/2, height/2, width - 2 * margin, height - 2 * margin, 20, 20, 20, 20);
     vel = [random(-5,5), random(-5,5)]
+    back_button = new MyButton(25,25,100, 50, "Back", 20);
+}
+
+function mousePressed() {
+    back_button.clicked();
 }
 
 function draw() {
     background(51);
 
+    // console.log("About to draw button");
+    back_button.draw();
+    // console.log("Drawn button");
+
     noStroke();
 
     fill(r,g,b);
 
+    // console.log("About to draw rect");
     myRect.draw();
+    // console.log("Drawn rect");
 
     if(scaleDown) {
         myRect.scale(0.99);
@@ -106,13 +160,13 @@ function draw() {
     else if(g > 0 && b < 255 && r == 0) {--g; ++b}
     else if(b > 0 && r < 255 && g == 0) {--b; ++r}
 
-}
+};
 
 function windowResized() {
     let widthRatio = myRect.width / width
     let heightRatio = myRect.height / height
     resizeCanvas(window.innerWidth, window.innerHeight)
-    
+
     // myRect
     myRect.update(width/2, height/2, width * widthRatio, height * heightRatio)
 }
